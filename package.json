@@ -1,0 +1,30 @@
+{
+  "name": "hook-redux",
+  "version": "0.0.1",
+  "author": {
+    "name": "Oleg Martynov",
+    "email": "olegman.ru@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/router-async/hook-redux/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/router-async/hook-redux.git"
+  },
+  "license": "MIT",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf lib",
+    "watch": "npm run clean && tsc -p . --watch",
+    "transpile": "npm run clean && tsc -p .",
+    "tsc": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "next"
+  },
+  "dependencies": {
+    "redux-actions-helpers": "1.x.x"
+  }
+}
