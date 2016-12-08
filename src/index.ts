@@ -1,8 +1,8 @@
 import { createAction, handleActions } from 'redux-actions-helpers';
 
 // actions
-const startTransition = createAction('@@router/START_TRANSITION', payload => ({ payload }));
-const endTransition = createAction('@@router/END_TRANSITION', payload => ({ payload }));
+export const startTransition = createAction('@@router/START_TRANSITION', payload => ({ payload }));
+export const endTransition = createAction('@@router/END_TRANSITION', payload => ({ payload }));
 
 // reducer
 const initialState = {
