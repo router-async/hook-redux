@@ -22,7 +22,7 @@
     "tsc": "tsc"
   },
   "devDependencies": {
-    "typescript": "next"
+    "typescript": "^2.1.4"
   },
   "dependencies": {
     "redux-actions-helpers": "1.x.x"

@@ -7,6 +7,7 @@ export const endTransition = createAction('@@router/END_TRANSITION', payload => 
 // reducer
 const initialState = {
     path: null,
+    location: null,
     route: null,
     status: null,
     params: null,
@@ -15,21 +16,25 @@ const initialState = {
 };
 export const reducer = handleActions({
     [startTransition]: (state, { payload }) => {
-        // refactor: https://github.com/Microsoft/TypeScript/issues/2103
-        return Object.assign({}, state, payload);
+        return {
+            ...state,
+            ...payload
+        }
     },
     [endTransition]: (state, { payload }) => {
-        // refactor: https://github.com/Microsoft/TypeScript/issues/2103
-        return Object.assign({}, state, payload);
+        return {
+            ...state,
+            ...payload
+        }
     }
 }, { initialState });
 
 // hook
 export const hookRedux = ({ dispatch }) => ({
-    start: ({ path }) => {
-        dispatch(startTransition({ path }));
+    start: ({ path, location }) => {
+        dispatch(startTransition({ path, location }));
     },
-    resolve: ({ path, route, status, params, redirect }) => {
-        dispatch(endTransition({ path, route, status, params, redirect }));
+    resolve: ({ route, status, params, redirect }) => {
+        dispatch(endTransition({ route, status, params, redirect }));
     }
 });
