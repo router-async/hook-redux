@@ -4,6 +4,7 @@ import { createAction, handleActions } from 'redux-actions-helpers';
 export const startTransition = createAction('@@router/START_TRANSITION', payload => ({ payload }));
 export const resolved = createAction('@@router/RESOLVED', payload => ({ payload }));
 export const endTransition = createAction('@@router/END_TRANSITION', payload => ({ payload }));
+export const error = createAction('@@router/ERROR', payload => ({ payload }));
 
 // reducer
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
     status: null,
     params: null,
     redirect: null,
+    error: null,
     isTransition: false
 };
 export const reducer = handleActions({
@@ -33,6 +35,12 @@ export const reducer = handleActions({
             ...state,
             ...payload
         }
+    },
+    [error]: (state, { payload }) => {
+        return {
+            ...state,
+            ...payload
+        }
     }
 }, { initialState });
 
@@ -46,5 +54,8 @@ export const hookRedux = ({ dispatch }) => ({
     },
     render: () => {
         dispatch(endTransition({ isTransition: false }));
+    },
+    error: ({ error }) => {
+        dispatch(error({ error, isTransition: false }));
     }
 });
