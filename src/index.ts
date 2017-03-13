@@ -2,6 +2,8 @@ import { createAction, handleActions } from 'redux-actions-helpers';
 
 // actions
 export const start = createAction('@@router/START', payload => ({ payload }));
+// TODO: remove this action in future
+export const resolve = createAction('@@router/RESOLVE', payload => ({ payload }));
 export const end = createAction('@@router/END', payload => ({ payload }));
 export const error = createAction('@@router/ERROR', payload => ({ payload }));
 export const cancel = createAction('@@router/CANCEL');
@@ -18,19 +20,7 @@ const initialState = {
     isTransition: false
 };
 export const reducer = handleActions({
-    [start]: (state, { payload }) => {
-        return {
-            ...state,
-            ...payload
-        }
-    },
-    [end]: (state, { payload }) => {
-        return {
-            ...state,
-            ...payload
-        }
-    },
-    [error]: (state, { payload }) => {
+    [start + resolve + end + error]: (state, { payload }) => {
         return {
             ...state,
             ...payload
@@ -46,8 +36,11 @@ export const hookRedux = ({ dispatch }) => ({
     start: ({ path, location }) => {
         dispatch(start({ path, location, isTransition: true }));
     },
-    render: ({ route, status, params, redirect }) => {
-        dispatch(end({ route, status, params, redirect, isTransition: false }));
+    resolve: ({ route, status, params, redirect }) => {
+        dispatch(resolve({ route, status, params, redirect }));
+    },
+    render: () => {
+        dispatch(end({ isTransition: false }));
     },
     error: ({ error }) => {
         dispatch(error({ error, isTransition: false }));
