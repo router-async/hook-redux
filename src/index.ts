@@ -37,8 +37,8 @@ export const hookRedux = ({ dispatch }) => ({
     render: ({ route, status, params, redirect }) => {
         dispatch(end({ route, status, params, redirect, isTransition: false }));
     },
-    error: ({ error }) => {
-        dispatch(error({ error, isTransition: false }));
+    error: ({ error: err }) => {
+        dispatch(error({ err, isTransition: false }));
     },
     cancel: () => {
         console.warn('router cancel transition');
