@@ -55,7 +55,7 @@ export const lastHookRedux = ({ dispatch, server }) => {
         }
     };
     if (server === true) {
-        hook['resolve'] = ({ route, status, params, redirect }) => {
+        return hook['resolve'] = ({ route, status, params, redirect }) => {
             dispatch(end({ route, status, params, redirect, isTransition: false }));
         }
     } else {
