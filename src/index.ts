@@ -31,15 +31,13 @@ export const reducer = handleActions({
 
 // hook
 export const firstHookRedux = ({ dispatch, server }) => {
+    const hook = {};
     if (server === true) {
-        return {};
-    } else {
-        return {
-            render: ({ route, status, params, redirect }) => {
-                dispatch(end({ route, status, params, redirect, isTransition: false }));
-            }
+        hook['render'] = ({ route, status, params, redirect }) => {
+            dispatch(end({ route, status, params, redirect, isTransition: false }));
         }
     }
+    return hook;
 };
 export const lastHookRedux = ({ dispatch, server }) => {
     const hook = {
@@ -55,10 +53,9 @@ export const lastHookRedux = ({ dispatch, server }) => {
         }
     };
     if (server === true) {
-        return hook['resolve'] = ({ route, status, params, redirect }) => {
+        hook['resolve'] = ({ route, status, params, redirect }) => {
             dispatch(end({ route, status, params, redirect, isTransition: false }));
         }
-    } else {
-        return hook;
     }
+    return hook;
 };
