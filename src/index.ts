@@ -30,20 +30,35 @@ export const reducer = handleActions({
 }, { initialState });
 
 // hook
-export const firstHookRedux = ({ dispatch }) => ({
-    render: ({ route, status, params, redirect }) => {
-        dispatch(end({ route, status, params, redirect, isTransition: false }));
+export const firstHookRedux = ({ dispatch, server }) => {
+    if (server === true) {
+        return {};
+    } else {
+        return {
+            render: ({ route, status, params, redirect }) => {
+                dispatch(end({ route, status, params, redirect, isTransition: false }));
+            }
+        }
     }
-});
-export const lastHookRedux = ({ dispatch }) => ({
-    start: ({ path, location }) => {
-        dispatch(start({ path, location, isTransition: true }));
-    },
-    error: ({ error: err }) => {
-        dispatch(error({ err, isTransition: false }));
-    },
-    cancel: () => {
-        console.warn('router cancel transition');
-        // dispatch(cancel());
+};
+export const lastHookRedux = ({ dispatch, server }) => {
+    const hook = {
+        start: ({ path, location }) => {
+            dispatch(start({ path, location, isTransition: true }));
+        },
+        error: ({ error: err }) => {
+            dispatch(error({ err, isTransition: false }));
+        },
+        cancel: () => {
+            console.warn('router cancel transition');
+            // dispatch(cancel());
+        }
+    };
+    if (server === true) {
+        hook['resolve'] = ({ route, status, params, redirect }) => {
+            dispatch(end({ route, status, params, redirect, isTransition: false }));
+        }
+    } else {
+        return hook;
     }
-});
+};
