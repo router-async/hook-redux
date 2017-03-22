@@ -12,7 +12,7 @@ const initialState = {
     location: null,
     route: null,
     status: null,
-    params: null,
+    params: {},
     redirect: null,
     error: null,
     isTransition: false
