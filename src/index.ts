@@ -32,7 +32,7 @@ export const reducer = handleActions({
 // hook
 export const firstHookRedux = ({ dispatch, server }) => {
     const hook = {};
-    if (server === true) {
+    if (server !== true) {
         hook['render'] = ({ route, status, params, redirect }) => {
             dispatch(end({ route, status, params, redirect, isTransition: false }));
         }
