@@ -35,6 +35,9 @@ export const hookRedux = ({ dispatch, server }) => ({
         dispatch(start({ path, location, isTransition: true }));
     },
     resolve: ({ route, status, params, redirect }) => {
+        server && dispatch(end({ route, status, params, redirect, isTransition: false }));
+    },
+    render: ({ route, status, params, redirect }) => {
         dispatch(end({ route, status, params, redirect, isTransition: false }));
     },
     error: ({ error: err }) => {
