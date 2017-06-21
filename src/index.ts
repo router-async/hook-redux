@@ -15,7 +15,8 @@ const initialState = {
     params: {},
     redirect: null,
     error: null,
-    isTransition: false
+    isTransition: false,
+    ctx: {}
 };
 export const reducer = handleActions({
     [start + end + error]: (state, { payload }) => {
@@ -31,17 +32,17 @@ export const reducer = handleActions({
 
 // hook
 export const hookRedux = ({ dispatch, server }) => ({
-    start: ({ path, location }) => {
-        dispatch(start({ path, location, isTransition: true }));
+    start: ({ path, location, ctx }) => {
+        dispatch(start({ path, location, isTransition: true, ctx.toObject() }));
     },
     resolve: ({ route, status, params, redirect }) => {
-        server && dispatch(end({ route, status, params, redirect, isTransition: false }));
+        server && dispatch(end({ route, status, params, redirect, isTransition: false, ctx.toObject() }));
     },
     render: ({ route, status, params, redirect }) => {
-        dispatch(end({ route, status, params, redirect, isTransition: false }));
+        dispatch(end({ route, status, params, redirect, isTransition: false, ctx.toObject() }));
     },
     error: ({ error: err }) => {
-        dispatch(error({ err, isTransition: false }));
+        dispatch(error({ err, isTransition: false, ctx.toObject() }));
     },
     cancel: () => {
         console.warn('router cancel transition');
