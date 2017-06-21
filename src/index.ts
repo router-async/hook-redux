@@ -33,16 +33,20 @@ export const reducer = handleActions({
 // hook
 export const hookRedux = ({ dispatch, server }) => ({
     start: ({ path, location, ctx }) => {
-        dispatch(start({ path, location, isTransition: true, ctx.toObject() }));
+        const plainCtx = ctx.toObject();
+        dispatch(start({ path, location, isTransition: true, ctx: plainCtx }));
     },
-    resolve: ({ route, status, params, redirect }) => {
-        server && dispatch(end({ route, status, params, redirect, isTransition: false, ctx.toObject() }));
+    resolve: ({ route, status, params, redirect, ctx }) => {
+        const plainCtx = ctx.toObject();
+        server && dispatch(end({ route, status, params, redirect, isTransition: false, ctx: plainCtx }));
     },
-    render: ({ route, status, params, redirect }) => {
-        dispatch(end({ route, status, params, redirect, isTransition: false, ctx.toObject() }));
+    render: ({ route, status, params, redirect, ctx }) => {
+        const plainCtx = ctx.toObject();
+        dispatch(end({ route, status, params, redirect, isTransition: false, ctx: plainCtx }));
     },
-    error: ({ error: err }) => {
-        dispatch(error({ err, isTransition: false, ctx.toObject() }));
+    error: ({ error: err, ctx }) => {
+        const plainCtx = ctx.toObject();
+        dispatch(error({ err, isTransition: false, ctx: plainCtx }));
     },
     cancel: () => {
         console.warn('router cancel transition');
