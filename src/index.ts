@@ -46,7 +46,7 @@ export const hookRedux = ({ dispatch, server }) => ({
     },
     error: ({ error: err, ctx }) => {
         const plainCtx = ctx.toObject();
-        dispatch(error({ error: err, ctx: plainCtx }));
+        dispatch(error({ error: err, isTransition: false, ctx: plainCtx }));
     },
     cancel: () => {
         console.warn('router cancel transition');
