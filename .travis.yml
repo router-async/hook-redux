@@ -8,10 +8,10 @@ cache:
     - node_modules
 
 script:
-  - npm i -g typings
+  - yarn global add typings
   - typings install
   - tsc --version
-  - npm run transpile
+  - yarn transpile
   - ls -l
   - ls -l lib
 
