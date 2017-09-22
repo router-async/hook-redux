@@ -1,6 +1,6 @@
 {
   "name": "hook-redux",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "author": {
     "name": "Oleg Martynov",
     "email": "olegman.ru@gmail.com"
@@ -22,7 +22,7 @@
     "tsc": "tsc"
   },
   "devDependencies": {
-    "typescript": "^2.1.4"
+    "typescript": "2.1.4"
   },
   "dependencies": {
     "redux-actions-helpers": "1.x.x"
