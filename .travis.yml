@@ -18,6 +18,7 @@ script:
   - cat .npmignore
 
 deploy:
+  skip_cleanup: true
   provider: npm
   email: olegman.ru@gmail.com
   api_key: $NPM_API_KEY
