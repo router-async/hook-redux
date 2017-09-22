@@ -10,7 +10,10 @@ cache:
 script:
   - yarn global add typings
   - typings install
+  - tsc --version
   - yarn transpile
+  - ls -l
+  - ls -l lib
 
 deploy:
   provider: npm
