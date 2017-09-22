@@ -10,12 +10,7 @@ cache:
 script:
   - yarn global add typings
   - typings install
-  - tsc --version
   - yarn transpile
-  - ls -l
-  - ls -l lib
-  - cat lib/index.js
-  - cat .npmignore
 
 deploy:
   skip_cleanup: true
