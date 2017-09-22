@@ -10,7 +10,10 @@ cache:
 script:
   - npm i -g typings
   - typings install
+  - tsc --version
   - npm run transpile
+  - ls -l
+  - ls -l lib
 
 deploy:
   provider: npm
